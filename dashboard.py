@@ -1,28 +1,20 @@
 from datetime import date
-from random import choice, random
-
 import dash
+import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
-
-
 import pandas as pd
 import plotly.express as px
 from dash.dependencies import Input, Output
-import dash_bootstrap_components as dbc
 
 test_data = pd.read_csv("data/world_data.csv")
 
 today = date.today()
 
-# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
-external_stylesheets= [dbc.themes.BOOTSTRAP]
+external_stylesheets = [dbc.themes.BOOTSTRAP]
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.title = "COVID Dashboard - UK Edition"
-
-
 
 app.layout = html.Div([
             html.Nav(className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow", children=[
@@ -124,10 +116,6 @@ app.layout = html.Div([
                     ])])])])
 
 
-
-
-
-
 def dropdown(location, user_enabled, display):
     return dcc.Dropdown(
                                 id="location",
@@ -163,7 +151,11 @@ def display_page(pathname):
         
 
 @app.callback(
-    [Output("cases-graph", "figure"), Output("deaths-graph", "figure"), Output("death-stats", "children"), Output("cases-stats", "children"), Output("vaccines-stats", "children")],
+    [
+        Output("cases-graph", "figure"), Output("deaths-graph", "figure"),
+        Output("death-stats", "children"), Output("cases-stats", "children"),
+        Output("vaccines-stats", "children")
+    ],
     [
         # Input('month-picker', "start_date"),
         # Input("month-picker", "end_date"),
@@ -172,9 +164,6 @@ def display_page(pathname):
 )
 def update_personal_ouput(value):
     # start_date, end_date, ):
-
-
-
 
     filtered_data_cases = test_data.loc[(test_data["location"] == value)] 
     # //& (test_data["date"] >= start_date) & (test_data["date"] <= end_date)]
@@ -190,13 +179,9 @@ def update_personal_ouput(value):
     latest_deaths = f'{filtered_data_cases["new_deaths"].iloc[-1]:.0f} today'
     latest_cases = f'{filtered_data_cases["new_cases"].iloc[-1]:.0f} today'
     
-    # last_vaccines_index = filtered_data_cases["new_vaccinations"].last_valid_index()
-    # latest_vaccines = f'{filtered_data_cases["new_vaccinations"][last_vaccines_index]:.0f} today'
     latest_vaccines = f'{filtered_data_cases["new_vaccinations"].iloc[-2]:.0f} today'
 
-    
     return fig_deaths, fig_cases, latest_deaths, latest_cases, latest_vaccines
-
 
 
 if __name__ == "__main__":
