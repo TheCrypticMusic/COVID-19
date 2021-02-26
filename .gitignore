@@ -8,3 +8,5 @@ venv
 config.py
 .gitattributes
 .DS_STORE
+data
+.gitignore
