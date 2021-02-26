@@ -1,12 +1,6 @@
 __pycache__
 .vscode
 assets
-data/data_cases.csv
-data/data_deaths.csv
-data/world_data.csv
+data
 venv
 config.py
-.gitattributes
-.DS_STORE
-data
-.gitignore
