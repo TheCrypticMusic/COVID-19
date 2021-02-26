@@ -1,0 +1,1 @@
+connection_info = ["127.0.0.1", "/tmp/mysql.sock", "Dan2019!?", "mysql"]
