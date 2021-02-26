@@ -1,6 +1,6 @@
 __pycache__
 .vscode
-assets
 data
 venv
 config.py
+.DS_STORE
