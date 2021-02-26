@@ -7,4 +7,4 @@ data/world_data.csv
 venv
 config.py
 .gitattributes
-
+.DS_STORE
